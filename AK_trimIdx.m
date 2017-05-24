@@ -1,6 +1,22 @@
 function [ trimIdx ] = AK_trimIdx( array, percent, trimSide )
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%AK_trimIdx creates and index of values to trim from an array. The
+%trimming of the values where this index == 1 will result in the trimming
+%of the passed percent of values from the high or low end of the
+%distribution of values, or an even split of both depending on the
+%parameters passed to the function.
+%   INPUT:
+%       array: an a array of doubles to trim
+%       percent: the percent of the extreme values of the distribution of
+%           values in the array to be trimmed
+%       trimSide: a string which determines what part of the
+%           distribution to be trimmed: the 'high' end of the distribution,
+%           the 'low' end of the distribution, or 'both' the high and low
+%           end of the distribution
+%   OUTPUT:
+%       trimIdx: an index of values in the array; where index == 1 values
+%           in the array should be trimmed in order to create a resulting
+%           array which is trimmed according to the specifications passed
+%           to this function
 
 % check inputs
 if nargin<2
