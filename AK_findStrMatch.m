@@ -7,16 +7,22 @@ if nargin < 2; % error message trigger
 elseif nargin < 3
     insensitiveYN = 0; % default to case sensitivity
 end
+if any(cellfun(@isnumeric,cell_array_str)) % no numeric values in cell array of strings
+    numIdx = cellfun(@isnumeric,cell_array_str);
+    cell_array_str(numIdx) = cellfun(@num2str,cell_array_str(numIdx),'UniformOutput',false); % change doubles to strings
+end
 
 cell_array_index = zeros(length(cell_array_str),1); % preallocate for speed
 
-if insensitiveYN==1
-    for C = 1:length(cell_array_str); % cycle through cell array
-        cell_array_index(C) = ~isempty(regexpi(cell_array_str{C},regexptranslate('wildcard',match_str), 'once'));
-    end
-else
-    for C = 1:length(cell_array_str); % cycle through cell array
-        cell_array_index(C) = ~isempty(regexp(cell_array_str{C},regexptranslate('wildcard',match_str), 'once'));
+if ~all(cellfun(@isempty,cell_array_str))
+    if insensitiveYN==1
+        for C = 1:length(cell_array_str); % cycle through cell array
+            cell_array_index(C) = ~isempty(regexpi(cell_array_str{C},regexptranslate('wildcard',match_str), 'once'));
+        end
+    else
+        for C = 1:length(cell_array_str); % cycle through cell array
+            cell_array_index(C) = ~isempty(regexp(cell_array_str{C},regexptranslate('wildcard',match_str), 'once'));
+        end
     end
 end
 
