@@ -1,6 +1,34 @@
 function [ structOut ] = AK_sortStruct( structIn, sortField, substring )
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
+%AK_sortStruct is a function for sorting the units in a structure array
+%based on a numarical substring contained within the a designated field of
+%the structure. Returns an updated version of the structure. 
+%   INPUT:
+%       structIn: the structure to be sorted
+%       sortField: a numerical index referencing the field to sort by (in
+%           the order the fields are displayed when the structure is
+%           entered into the command window); this field should contain a
+%           string containing a numerical character to sort by
+%       substring: the substring to look for in the string stored in the
+%           designated field; this substring should directly precede the
+%           numerical character to sort by
+%   OUTPUT:
+%       structOut: the same as structIn, except with the units in the
+%           structure array sorted
+%
+% Example useage:
+%   This usage would sort .txt files containing data for this subject based
+%   on the session number (i.e., filename = 'subject1-session2.txt').
+%
+% data_dir = ... % insert directory name here
+% % create structure of all .txt files with the subject code in the file name
+% file_list = dir(fullfile(data_dir,[subject_code '*.txt'])); 
+% % sort the structure by field # 1 (name; aka filename) based on the numerical character which follows the substring 'session'
+% file_list = AK_sortStruct(file_list,1,'session');
+
+% check inputs
+if nargin < 3
+    error('AK_sortStruct requires three inputs: a structure, a numerical index of a field in that structure, and a substring which directly precedes the numerical character to sort by (see documentation)');
+end
 
 fields = fieldnames(structIn);
 cell = struct2cell(structIn);
