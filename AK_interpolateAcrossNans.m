@@ -1,6 +1,19 @@
 function [ signalOut ] = AK_interpolateAcrossNans( signalIn )
-%UNTITLED5 Summary of this function goes here
-%   Detailed explanation goes here
+%AK_interpolateAcrossNans identifies chuncks of nans in a time series and
+%replaces the nans with a linear interpolation across the values before and
+%after each series of nans. This kind of thing is a common way to deal with
+%blinks in pupil size data but should only be used if interpolation will
+%not introduce artifacts into the analysis which are more confounding than
+%the blinks.
+%   INPUT:
+%       signalIn: a vector of time series data where each value corresponds
+%           to a point in time; note that the linear interpolation
+%           implemented in this function assumes that time series data are
+%           sampled at a constant frequency
+%   OUTPUT:
+%       signalOut: a version of signalIn where series of nans have been
+%           replaced with values from a linear interpolation between the
+%           values that precede and follow each continuous set of nans
 
 nanIdx = isnan(signalIn);
 nanGroupIdx = find(nanIdx(2:end)~=nanIdx(1:end-1));
