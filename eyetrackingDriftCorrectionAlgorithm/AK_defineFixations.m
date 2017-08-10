@@ -6,7 +6,7 @@ function [ fixations ] = AK_defineFixations( PORtuples, radiusThreshold, minDur 
 %milliseconds) for which the maximum distance of any member of the set of
 %tuples from the set's centroid does not exceed some threshold radius (in
 %degrees visual angle). This definition of fixation is a dispersion-based
-%fixation detection algorithm (Anliker, 1976 ;Blignaut, 2009).
+%fixation detection algorithm (Anliker, 1976; Blignaut, 2009).
 %   INPUT:
 %       PORtuples:  a 2D matrix of point of regard (POR) tuples of raw eye
 %          tracking data (number of observations by [x, y, time]); these data
@@ -32,6 +32,14 @@ function [ fixations ] = AK_defineFixations( PORtuples, radiusThreshold, minDur 
 %       sensative to input parameters; optimal parameter values depend on task
 %       but often fall within the ranges radiusThreshold = .7 to 1.3 degrees 
 %       and minDur = 100 to 200 milliseconds
+%
+%   References:
+%       Anliker, J. 1976. Eye movements- On-line measurement, analysis,
+%           and control. Eye movements and psychological processes,
+%           185–199.
+%       Blignaut, P. (2009). Fixation identification: The optimum threshold for
+%           a dispersion algorithm. Attention, Perception & Psychophysics,
+%           71(4), 881–895. http://doi.org/10.3758/APP
 
 
 %check inputs
